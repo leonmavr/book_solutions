@@ -1,0 +1,54 @@
+% LaTeX header for Pandoc: problem & solution tcolorbox styles
+\usepackage{fontspec}
+\usepackage{cancel}
+\usepackage{tikz}
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{skins, breakable}
+
+% Colors (adjust as you like)
+\definecolor{pdhighlight}{HTML}{FBE8F3}
+\definecolor{pdframe}{HTML}{AD4670}
+\definecolor{pdtitle}{HTML}{FFFFFF}
+
+% Prefer a font with Greek support; fall back if not available
+\IfFontExistsTF{DejaVu Serif}{\setmainfont{DejaVu Serif}}{%
+  \IfFontExistsTF{FreeSerif}{\setmainfont{FreeSerif}}{%
+    % leave default if no known serif found
+  }
+}
+% Prefer a math font with wide unicode support if available
+\IfFontExistsTF{XITS Math}{\setmathfont{XITS Math}}{%
+  \IfFontExistsTF{TeX Gyre Pagella Math}{\setmathfont{TeX Gyre Pagella Math}}{%
+    % fallback: do nothing
+  }
+}
+
+% Problem box: highlighted title area, rounded corners, drop shadow
+\newtcolorbox{problem}[1][]
+{
+  enhanced,
+  breakable,
+  colback=pdhighlight,
+  colframe=pdframe,
+  boxrule=0.9pt,
+  arc=3mm,
+  left=6pt,right=6pt,top=6pt,bottom=6pt,
+  fonttitle=\bfseries,
+  title=#1,
+  attach boxed title to top left={yshift=-2mm,xshift=4mm},
+  boxed title style={colback=pdframe,coltitle=pdtitle,boxrule=0pt,arc=2mm,left=6pt,right=6pt},
+  drop shadow,
+}
+
+% Solution box: subtle frame, white background
+\newtcolorbox{solution}[1][]
+{
+  enhanced, breakable,
+  colback=white,
+  colframe=gray!30,
+  boxrule=0.6pt,
+  arc=2mm,
+  left=6pt,right=6pt,top=4pt,bottom=4pt,
+  fonttitle=\bfseries,
+  title=#1,
+}
